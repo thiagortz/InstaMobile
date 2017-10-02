@@ -9,26 +9,36 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Image,
+  FlatList,
+  Dimensions
 } from 'react-native';
 
+const width = Dimensions.get('screen').width
+
 export default class InstaMobile extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
+    render() {
+        const fotos = [
+            {id: 1, usuario: 'rafael'},
+            {id: 2, usuario: 'alberto'},
+            {id: 3, usuario: 'vitor'}
+        ];
+
+        return (
+            <FlatList style={{marginTop: 20}}
+                keyExtractor={item => item.id}
+                data={fotos}
+                renderItem={ ({item}) =>
+                    <View>
+                        <Text>{item.usuario}</Text>
+                        <Image source={require('./resources/img/sharon.jpg')}
+                          style={{width: width, height: width}} />
+                    </View>
+                }
+            />
+        );
+    }
 }
 
 const styles = StyleSheet.create({
