@@ -51,5 +51,3 @@ const styles = StyleSheet.create({
           height: width,
       },
 });
-
-AppRegistry.registerComponent('InstaMobile', () => InstaMobile);
