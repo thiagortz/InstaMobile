@@ -8,17 +8,12 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  View,
-  Image,
   FlatList,
-  Dimensions,
   ScrollView
 } from 'react-native';
 
 import Post from './components/Post'
 
-const width = Dimensions.get('screen').width
 
 class InstaMobile extends Component {
 
