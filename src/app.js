@@ -30,9 +30,13 @@ class InstaMobile extends Component {
   }
 
   componentDidMount(){
-    fetch('https://instalura-api.herokuapp.com/')
-    .then(resp => resp.json())
-    .then(json => this.setState({fotos: json}))
+    fetch('https://instalura-api.herokuapp.com/api/public/fotos/rafael')
+      .then(resp => resp.json())
+      .then(json => this.setState({fotos: json}))
+      .catch(e => {
+        console.warn('Não foi possível carregar as fotos: ' + e);
+        this.setState({status: 'ERRO'})
+      });
   }
 
   render() {
