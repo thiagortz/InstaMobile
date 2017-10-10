@@ -26,12 +26,12 @@ export default class Post extends Component {
     }
 
     loadIcon(likeada){
-        return likeads ? require('../../resources/img/s2-checked.png') : require('../../resources/img/s2.png')
+        return likeada ? require('../../resources/img/s2-checked.png') : require('../../resources/img/s2.png')
     }
 
     like(){
-        let newList = []
         const {foto} = this.state
+        let newList = []
 
         if(!foto.likeada){
             newList = [
@@ -85,8 +85,8 @@ export default class Post extends Component {
               </View>
                 <Image source={{uri: foto.urlFoto}}  style={styles.postPhoto} />
                 <View style={styles.footer}>
-                    <TouchableOpacity onPress={this.like}>
-                        <Image style={this.loadIcon(foto.likeada)}/>
+                    <TouchableOpacity onPress={this.like.bind(this)}>
+                        <Image style={styles.buttonLike} source={this.loadIcon(foto.likeada)}/>
                     </TouchableOpacity>
                 </View>
                 {this.showLikes(foto.likers)}
@@ -121,9 +121,11 @@ const styles = StyleSheet.create({
     },
     likes:{
         fontWeight: 'bold',
+        marginLeft: 5,
     },
     comment:{
         flexDirection: 'row',
+        marginLeft: 5,
     },
     titleComment:{
         fontWeight: 'bold',
