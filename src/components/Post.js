@@ -30,10 +30,24 @@ export default class Post extends Component {
     }
 
     like(){
+        let newList = []
+        const {foto} = this.state
+
+        if(!foto.likeada){
+            newList = [
+                ...foto.likers,
+                {login: 'meuUsuario'}
+            ]
+        }else{
+            newList = foto.likers.filter(liker => {
+                return liker.login !== 'meuUsuario'
+            })
+        }
 
         const fotoAtualizada = {
-            ...this.state.foto,
-            likeada: !this.state.foto.likeada
+            ...foto,
+            likeada: !foto.likeada,
+            likers: newList
         }
 
         this.setState({foto: fotoAtualizada});
@@ -46,7 +60,17 @@ export default class Post extends Component {
         return (<Text style={styles.likes}>
                     {likers.length} {likers.length > 1 ? 'curtidas' : 'curtida'}
                 </Text>
-                );
+                )
+    }
+    showLegend(foto){
+        if(foto.comentario === '')
+            return
+        
+        return (<View style={styles.comment}>
+                    <Text style={styles.titleComment}>{foto.loginUsuario}</Text>
+                    <Text>{foto.comentario}</Text>
+                </View>
+                )
     }
 
     render() {
@@ -65,7 +89,8 @@ export default class Post extends Component {
                         <Image style={this.loadIcon(foto.likeada)}/>
                     </TouchableOpacity>
                 </View>
-                {this.showLikes(foto.likers)}}
+                {this.showLikes(foto.likers)}
+                {this.showLegend(foto)}
             </View>
         );
     }
@@ -89,13 +114,20 @@ const styles = StyleSheet.create({
         },
     buttonLike:{
         height:40,
-        width:40
+        width:40,
     },
     footer:{
-        margin: 10
+        margin: 10,
     },
     likes:{
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+    },
+    comment:{
+        flexDirection: 'row',
+    },
+    titleComment:{
+        fontWeight: 'bold',
+        marginRight: 5,
     }
         
 });
